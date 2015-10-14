@@ -1,0 +1,42 @@
+{
+  "name": "deadlockmodelling",
+  "description": "An OER about Deadlock Modelling",
+  "author": "Victor Moneratto <victor.moneratto@gmail.com>",
+  "repository": "https://github.com/victormoneratto/deadlockmodelling",
+  "license": "ISC",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "gulp"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.3.10",
+    "browserify": "^11.2.0",
+    "debowerify": "^1.3.1",
+    "del": "^2.0.2",
+    "gulp": "^3.8.8",
+    "gulp-autoprefixer": "0.0.7",
+    "gulp-connect": "^2.0.6",
+    "gulp-csslint": "^0.1.5",
+    "gulp-filter": "^3.0.1",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^0.5.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-jshint": "^1.8.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-ruby-sass": "^0.5.0",
+    "gulp-sequence": "^0.4.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^0.3.2",
+    "gulp-util": "^3.0.6",
+    "imagemin-pngcrush": "^0.1.0",
+    "jshint-stylish": "^2.0.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

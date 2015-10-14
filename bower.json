@@ -1,0 +1,8 @@
+{
+  "name": "deadlockmodelling",
+  "version": "0.1.0",
+  "description": "An OER about Deadlock Modelling",
+  "dependencies": {
+    "bootstrap-sass-official": "latest"
+  }
+}
