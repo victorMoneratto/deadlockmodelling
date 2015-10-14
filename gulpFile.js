@@ -46,9 +46,7 @@ gulp.task('jade', function () {
 });
 
 gulp.task('js', function () {
-    //jshint
-    //gulp.src('/scripts/**/*.js')
-    //    ;
+    //TODO: jshint
 
     var b = browserify({entries: config.src + '/assets/scripts/app.js', debug: true});
     b.transform(debowerify);
@@ -59,7 +57,7 @@ gulp.task('js', function () {
         })
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(uglify())
+        .pipe(gulpif(config.env === 'production', uglify()))
         .pipe(gulp.dest(config.build + '/assets/scripts/'))
         .pipe(connect.reload());
 });
