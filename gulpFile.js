@@ -19,6 +19,7 @@ var gulp       = require('gulp'),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
     plumber    = require('gulp-plumber'),
+    merge      = require('merge-stream'),
     combiner   = require('stream-combiner2');
 
 
@@ -48,7 +49,7 @@ gulp.task('jade', function () {
 gulp.task('js', function () {
     //TODO: jshint
 
-    var b = browserify({entries: config.src + '/assets/scripts/app.js', debug: true});
+    var b = browserify({entries: config.src + '/scripts/app.js', debug: true});
     b.transform(debowerify);
     return b.bundle()
         .on('error', function (err) {
@@ -58,7 +59,7 @@ gulp.task('js', function () {
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(gulpif(config.env === 'production', uglify()))
-        .pipe(gulp.dest(config.build + '/assets/scripts/'))
+        .pipe(gulp.dest(config.build + '/scripts/'))
         .pipe(connect.reload());
 });
 
@@ -70,26 +71,31 @@ gulp.task('sass', function () {
         taskConfig.sass = {};
     }
 
-    return gulp.src(config.src + '/assets/styles/app.sass')
-        .pipe(sass())
+    return gulp.src(config.src + '/styles/app.sass')
+        .pipe(plumber())
+        .pipe(sass({
+            style: 'compressed', loadPath: [
+                'lib/bootstrap-sass-official/assets/stylesheets'
+            ]
+        }))
         .pipe(prefix('last 2 version'))
-        .pipe(gulp.dest(config.build + '/assets/styles/'))
+        .pipe(gulp.dest(config.build + '/styles/'))
         .pipe(connect.reload());
 });
 
 gulp.task('assets', function () {
-    return gulp.src([
-            config.src + '/assets/**/*',
-            '!' + config.src + '/assets/styles/*',
-            '!' + config.src + '/assets/scripts/*'])
-        .pipe(gulp.dest(config.build + '/assets'))
-        .pipe(connect.reload());
+    return merge(gulp.src('lib/bootstrap-sass-official/assets/fonts/**/*')
+            .pipe(gulp.dest(config.build + '/assets/fonts')),
+
+        gulp.src(config.src + '/assets/**/*')
+            .pipe(gulp.dest(config.build + "/assets"))
+    );
 });
 
 gulp.task('watch', function () {
-    gulp.watch([config.src + 'assets/scripts/**/*.js'], ['js']);
+    gulp.watch([config.src + '/scripts/**/*.js'], ['js']);
     gulp.watch([config.src + '/**/*.jade'], ['jade']);
-    gulp.watch([config.src + '/assets/styles/**/*.sass'], ['sass']);
+    gulp.watch([config.src + '/styles/**/*.sass'], ['sass']);
 });
 
 gulp.task('connect', function () {

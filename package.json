@@ -35,6 +35,7 @@
     "gulp-util": "^3.0.6",
     "imagemin-pngcrush": "^0.1.0",
     "jshint-stylish": "^2.0.1",
+    "merge-stream": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
