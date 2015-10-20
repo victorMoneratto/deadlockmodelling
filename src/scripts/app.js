@@ -22,9 +22,18 @@ function App() {
                 'border-width': 3,
                 'background-color': 'white'
             })
+            .selector('node.process')
+            .css({
+                'shape': 'ellipse'
+            })
+            .selector('node.resource')
+            .css({
+                'shape': 'rectangle'
+            })
             .selector('edge')
             .css({'target-arrow-shape': 'triangle'})
     });
+
     this.graph = this.graphContainer.cytoscape('get');
 
     var pagerNext = $("#pager-next"),
@@ -64,3 +73,6 @@ App.prototype.translate = function (locale) {
         }
     });
 };
+
+$('#pager-finishGuide').click(function(event) {
+});

@@ -14,7 +14,7 @@ var Guide = function(polyglot, graph, status, pagerPrev, pagerNext, pagerFinish)
 
     var self = this;
     this.pagerNext.click(function() {self.next()});
-    this.pagerPrevious.click(function() {self.previous()});
+    this.pagerPrevious.click(function() {if(!self.pagerPrevious.hasClass('disabled')) self.previous()});
 };
 
 module.exports = Guide;
@@ -34,6 +34,8 @@ Guide.prototype.start = function () {
         self.guide = data;
         self.showStep();
     })
+
+    $('#status-title').html(this.polyglot.t('guide.title'));
 };
 
 Guide.prototype.stop = function(g) {
@@ -79,13 +81,9 @@ Guide.prototype.showStep = function() {
     this.graph.remove(this.graph.elements());
     this.graph.add(this.guide.steps[this.step]);
     this.graph.layout();
-    console.log(this.step);
-    console.log(this.polyglot.t('guide.instruction.' + this.step));
     this.status.html(this.polyglot.t('guide.instruction.' + this.step));
 };
 
 Guide.prototype.translate = function () {
     'use strict';
-
-    $('#status-title').html(this.polyglot.t('guide.title'));
 };
