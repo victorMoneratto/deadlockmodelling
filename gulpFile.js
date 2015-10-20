@@ -41,6 +41,7 @@ config.build = 'build/' + config.env;
 
 gulp.task('jade', function () {
     return gulp.src(config.src + '/**/*.jade')
+        .pipe(plumber())
         .pipe(jade())
         .pipe(gulp.dest(config.build))
         .pipe(connect.reload());
@@ -51,15 +52,19 @@ gulp.task('js', function () {
 
     var b = browserify({entries: config.src + '/scripts/app.js', debug: true});
     b.transform(debowerify);
-    return b.bundle()
-        .on('error', function (err) {
-            gutil.log(err.message);
-            this.emit('end');
-        })
-        .pipe(source('app.js'))
-        .pipe(buffer())
-        .pipe(gulpif(config.env === 'production', uglify()))
-        .pipe(gulp.dest(config.build + '/scripts/'))
+    return merge(
+            b.bundle()
+                .on('error', function (err) {
+                    gutil.log(err.message);
+                    this.emit('end');
+                })
+                .pipe(source('app.js'))
+                .pipe(buffer())
+                .pipe(gulpif(config.env === 'production', uglify()))
+                .pipe(gulp.dest(config.build + '/scripts/')),
+
+            gulp.src(config.lib + '/l20n/dist/compat/web/*.js')
+                .pipe(gulp.dest(config.build + '/scripts')))
         .pipe(connect.reload());
 });
 
@@ -85,7 +90,7 @@ gulp.task('sass', function () {
 
 gulp.task('assets', function () {
     return merge(gulp.src('lib/bootstrap-sass-official/assets/fonts/**/*')
-            .pipe(gulp.dest(config.build + '/assets/fonts')),
+            .pipe(gulp.dest(config.build + '/assets/fonts/')),
 
         gulp.src(config.src + '/assets/**/*')
             .pipe(gulp.dest(config.build + "/assets"))
@@ -95,7 +100,8 @@ gulp.task('assets', function () {
 gulp.task('watch', function () {
     gulp.watch([config.src + '/scripts/**/*.js'], ['js']);
     gulp.watch([config.src + '/**/*.jade'], ['jade']);
-    gulp.watch([config.src + '/styles/**/*.sass'], ['sass']);
+    gulp.watch([config.src + '/styles/**/*.s*ss'], ['sass']);
+    gulp.watch([config.src + '/assets/**/*'], ['assets']);
 });
 
 gulp.task('connect', function () {

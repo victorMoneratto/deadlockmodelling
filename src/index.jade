@@ -1,13 +1,35 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="utf-8")
-        title Modelagem em Deadlocks
-        link(href="styles/app.css" rel="styleSheet")
-    body
-        .container
-            .jumbotron
-                h1 Modelagem em Deadlocks
-                p Yay
+doctype head
+html(lang='en')
+    meta(charset='utf-8')
+    title
 
-        script(src="scripts/app.js")
+    link(href='styles/app.css' rel='styleSheet')
+
+    body
+        .jumbotron
+            .container
+                h1#title
+        #content.container
+            #status-panel.panel.panel-primary
+                #status-title.panel-heading
+                #status-desc.panel-body
+                .panel-footer
+                    ul.pager
+                        li#pager-previous.previous.hidden
+                            a(href='#')
+                                span.glyphicon.glyphicon-menu-left
+                                | Anterior
+                        li#pager-startGuide.previous.hidden
+                            a(href='#')
+                                span.glyphicon.glyphicon-menu-left
+                                | Voltar ao Guia
+                        li#pager-next.next.hidden
+                            a(href='#')
+                                | Próximo
+                                span.glyphicon.glyphicon-menu-right
+                        li#pager-finishGuide.next.hidden
+                            a(href='#')
+                                | Finalizar
+                                span.glyphicon.glyphicon-ok
+                #graph-container
+        script(src='scripts/app.js')

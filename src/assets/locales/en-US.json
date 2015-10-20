@@ -1,0 +1,10 @@
+{
+  "title": "Deadlock Modelling",
+  "guide":
+  {
+    "title": "Guided Simulation",
+    "instruction": {
+      "0": "<strong>A</strong>, <strong>B</strong> and <strong>C</strong> are <em>processes<em>"
+    }
+  }
+}
