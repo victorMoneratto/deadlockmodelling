@@ -94,7 +94,7 @@ gulp.task('assets', function () {
 
         gulp.src(config.src + '/assets/**/*')
             .pipe(gulp.dest(config.build + "/assets"))
-    );
+    ).pipe(connect.reload());
 });
 
 gulp.task('watch', function () {

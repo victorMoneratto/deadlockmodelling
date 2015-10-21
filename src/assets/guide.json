@@ -6,7 +6,7 @@
         {"data": {"name": "B"}, "classes": "process"},
         {"data": {"name": "C"}, "classes": "process"}
       ],
-      "layout":{"name": "grid", "padding": "100", "fit":"true"}
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
     },
     {
       "nodes": [
@@ -18,7 +18,7 @@
         {"data": {"name": "Y"}, "classes": "resource"},
         {"data": {"name": "Z"}, "classes": "resource"}
       ],
-      "layout":{"name": "grid", "padding": "100", "fit":"true"}
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
     }
   ]
 }

@@ -1,10 +1,16 @@
 {
   "title": "Deadlock Modelling",
-  "guide":
-  {
+  "guide": {
     "title": "Guided Simulation",
     "instruction": {
-      "0": "<strong>A</strong>, <strong>B</strong> and <strong>C</strong> are <em>processes<em>"
+      "0": "<strong>A</strong>, <strong>B</strong> and <strong>C</strong> are <em>processes<em>",
+      "1": "<strong>X</strong>, <strong>Y</strong> and <strong>Z</strong> are <em>resources<em>"
+    }
+  },
+  "sandbox": {
+    "title": "Free Simulation",
+    "statusDesc": {
+      "ok": "There are no deadlocks"
     }
   }
 }

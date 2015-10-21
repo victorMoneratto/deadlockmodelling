@@ -1,89 +1,52 @@
 var $ = require('jquery');
+var AppMode = require('./app-mode');
 
-var Guide = function(polyglot, graph, status, pagerPrev, pagerNext, pagerFinish) {
+var Guide = function (polyglot, graph) {
     'use strict';
 
-    this.polyglot = polyglot;
-    this.guide = undefined;
-    this.graph = graph;
-    this.status = status;
-    this.pagerPrevious = pagerPrev;
-    this.pagerNext = pagerNext;
-    this.pagerFinish = pagerFinish;
-    this.step = 0;
-
-    var self = this;
-    this.pagerNext.click(function() {self.next()});
-    this.pagerPrevious.click(function() {if(!self.pagerPrevious.hasClass('disabled')) self.previous()});
-};
-
-module.exports = Guide;
-
-Guide.prototype.start = function () {
-    'use strict';
+    AppMode.call(this, polyglot, graph);
 
     this.step = 0;
-
-    this.pagerPrevious.addClass('disabled');
-    this.pagerPrevious.removeClass('hidden');
-    this.pagerNext.removeClass('hidden');
-    this.pagerFinish.addClass('hidden');
-
     var self = this;
-    $.getJSON('assets/guide.json', function(data) {
+    $.getJSON('assets/guide.json', function (data) {
         self.guide = data;
         self.showStep();
-    })
-
-    $('#status-title').html(this.polyglot.t('guide.title'));
+    }).done(function () {
+        self.triggerStatusUpdate(
+            self.polyglot.t('guide.instruction.0'),
+            self.polyglot.t('guide.title'));
+    });
 };
 
-Guide.prototype.stop = function(g) {
-    'use strict';
+Guide.prototype = Object.create(AppMode.prototype);
+Guide.prototype.constructor = Guide;
 
-    delete this.guide;
+//var base_detach = Guide.prototype.detach;
+//Guide.prototype.detach = function () {
+//    base_detach.call(this);
+//};
 
-    this.pagerPrevious.addClass('hidden');
-    this.pagerNext.addClass('hidden');
-    this.pagerFinish.addClass('hidden');
-};
-
-Guide.prototype.next = function() {
-    'use strict';
-
-    this.pagerPrevious.removeClass('disabled');
-
+Guide.prototype.next = function () {
     this.step++;
     this.showStep();
 
-    if(this.step == this.guide.steps.length - 1) {
-        this.pagerNext.addClass('hidden');
-        this.pagerFinish.removeClass('hidden');
-    }
+    return this.step == this.guide.steps.length-1;
 };
 
-Guide.prototype.previous = function() {
-    'use strict';
-
+Guide.prototype.previous = function () {
     this.step--;
     this.showStep();
 
-    this.pagerFinish.addClass('hidden');
-    this.pagerNext.removeClass('hidden');
-    if(this.step == 0) {
-        this.pagerPrevious.addClass('disabled');
-    }
+    return this.step == 0;
 };
 
-Guide.prototype.showStep = function() {
+Guide.prototype.showStep = function () {
     'use strict';
 
     this.graph.remove(this.graph.elements());
     this.graph.add(this.guide.steps[this.step]);
     this.graph.layout();
-    this.status.html(this.polyglot.t('guide.instruction.' + this.step));
+    this.triggerStatusUpdate(this.polyglot.t('guide.instruction.' + this.step));
 };
 
-Guide.prototype.translate = function () {
-    'use strict';
-};
+module.exports = Guide;
