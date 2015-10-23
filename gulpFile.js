@@ -52,19 +52,15 @@ gulp.task('js', function () {
 
     var b = browserify({entries: config.src + '/scripts/app.js', debug: true});
     b.transform(debowerify);
-    return merge(
-            b.bundle()
-                .on('error', function (err) {
-                    gutil.log(err.message);
-                    this.emit('end');
-                })
-                .pipe(source('app.js'))
-                .pipe(buffer())
-                .pipe(gulpif(config.env === 'production', uglify()))
-                .pipe(gulp.dest(config.build + '/scripts/')),
-
-            gulp.src(config.lib + '/l20n/dist/compat/web/*.js')
-                .pipe(gulp.dest(config.build + '/scripts')))
+    return b.bundle()
+        .on('error', function (err) {
+            gutil.log(err.message);
+            this.emit('end');
+        })
+        .pipe(source('app.js'))
+        .pipe(buffer())
+        .pipe(gulpif(config.env === 'production', uglify()))
+        .pipe(gulp.dest(config.build + '/scripts/'))
         .pipe(connect.reload());
 });
 

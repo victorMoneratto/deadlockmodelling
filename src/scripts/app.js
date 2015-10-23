@@ -1,11 +1,10 @@
 var $ = require('jquery');
-var Polyglot = require('polyglot');
 var cytoscape = require('cytoscape');
+var Polyglot = require('polyglot');
 
 var AppMode = require('./app-mode');
 var Guide = require('./guide');
 var Sandbox = require('./sandbox');
-
 
 function App() {
     //collect elements dom
@@ -20,10 +19,12 @@ function App() {
 
     //init polyglot and start localization
     this.polyglot = new Polyglot();
-    this.translate('en-US');
+    this.locale = 'en-US';
+    this.translate();
 
     //init cytoscape
     cytoscape.registerJquery($);
+
     this.graphContainer.cytoscape({
         style: cytoscape.stylesheet()
             .selector('node')
@@ -45,28 +46,39 @@ function App() {
                 'shape': 'rectangle'
             })
             .selector('edge')
-            .css({'target-arrow-shape': 'triangle'})
+            .css({
+                'width': '8',
+                'target-arrow-shape': 'triangle',
+                //'source-arrow-shape': 'circle',
+                'line-color': '#000',
+                'source-arrow-color': '#000',
+                'target-arrow-color': '#000'
+            })
+            .selector('node.dead')
+            .css({
+                'border-width': 6,
+                'border-color': 'red'
+            })
     });
 
     this.graph = this.graphContainer.cytoscape('get');
-
-    if (window.location.hash === '#sandbox') {
-        this.setSandboxMode();
-    } else {
-        this.setGuideMode();
-    }
 }
 
 App.prototype.translate = function (locale) {
     'use strict';
 
-    var l = (locale === 'pt-BR' ? 'pt-BR' : 'en-US');
+    if (locale != undefined) {
+        this.locale = locale;
+    }
+
     var self = this;
-    $.getJSON('assets/locales/' + l + '.json', function (phrases) {
+    $.getJSON('assets/locales/' + this.locale + '.json', function (phrases) {
         self.polyglot.extend(phrases);
 
         document.title = self.polyglot.t('title');
         self.pageTitle.html(document.title);
+        app.statusTitle.html(self.polyglot.t(self.activeMode.status.titleId));
+        app.statusDesc.html(self.polyglot.t(self.activeMode.status.descId));
     }).always(function () {
         self.graph.resize();
     });
@@ -74,17 +86,20 @@ App.prototype.translate = function (locale) {
 
 App.prototype.setSandboxMode = function () {
     this.pagerStartGuide.removeClass('hidden');
+    this.pagerFinishGuide.addClass('hidden');
+    this.pagerPrevious.addClass('hidden');
 
-    this.setActiveMode(new Sandbox(this.polyglot, this.graph))
+    this.setActiveMode(new Sandbox(this.graph, cytoscape))
 };
 
 App.prototype.setGuideMode = function () {
+    this.pagerPrevious.addClass('hidden');
     this.pagerStartGuide.addClass('hidden');
+
     this.pagerFinishGuide.addClass('hidden');
-    this.pagerPrevious.removeClass('hidden');
     this.pagerNext.removeClass('hidden');
 
-    this.setActiveMode(new Guide(this.polyglot, this.graph))
+    this.setActiveMode(new Guide(this.graph))
 };
 
 App.prototype.setActiveMode = function (newMode) {
@@ -92,41 +107,79 @@ App.prototype.setActiveMode = function (newMode) {
         this.activeMode.detach();
     }
 
+    this.graph.remove(this.graph.elements());
+
     this.activeMode = newMode;
 };
 
-$(document).ready(function () {
-    'use strict';
+App.prototype.updateStatus = function () {
+    app.statusTitle.html(this.polyglot.t(this.activeMode.status.titleId));
+    app.statusDesc.html(this.polyglot.t(this.activeMode.status.descId));
 
-    var app = new App();
+    this.graph.resize();
+};
 
-    app.pagerPrevious.click(function () {
-        if (app.activeMode instanceof Guide) {
-            app.activeMode.previous();
+App.prototype.previousStep = function () {
+    if (app.activeMode instanceof Guide) {
+        app.pagerNext.removeClass('hidden');
+        app.pagerFinishGuide.addClass('hidden');
+        if (app.activeMode.previous()) {
+            app.pagerPrevious.addClass('hidden');
         }
-    });
+    }
+};
 
-    app.pagerNext.click(function () {
-        if (app.activeMode instanceof Guide) {
-            app.activeMode.next();
+App.prototype.nextStep = function () {
+    if (app.activeMode instanceof Guide) {
+        app.pagerPrevious.removeClass('hidden');
+        if (app.activeMode.next()) {
+            app.pagerNext.addClass('hidden');
+            app.pagerFinishGuide.removeClass('hidden');
         }
-    });
+    }
+};
 
-    app.pagerStartGuide.click(function () {
-        app.setGuideMode()
-    });
+App.prototype.router = function () {
+    switch (location.hash) {
+        case '#guide':
+            this.setGuideMode();
+            break;
+        case '#guide/previous':
+            this.previousStep();
+            break;
+        case '#guide/next':
+            this.nextStep();
+            break;
+        case '#sandbox':
+            this.setSandboxMode();
+            break;
+        case '#translate':
+            this.translate();
+            break;
+        case '#translate/pt-BR':
+            this.translate('pt-BR');
+            break;
+        case '#translate/en-US':
+            this.translate('en-US');
+            break;
+        default:
+            this.setGuideMode();
+            break;
+    }
+};
 
-    app.pagerFinishGuide.click(function () {
-        app.setSandboxMode()
-    });
+var app;
 
-    $(window).on('status-update', function (event) {
-        if (event.status.title) {
-            app.statusTitle.html(event.status.title);
-        }
-        if (event.status.desc) {
-            app.statusDesc.html(event.status.desc);
-        }
-    });
+$(function () {
+    app = new App();
+    app.router();
+
+    window.addEventListener('hashchange', function () {
+        app.router();
+    }, false);
+});
+
+$(window).on('status-update', function (event) {
+    app.updateStatus();
 });
 

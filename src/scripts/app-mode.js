@@ -1,21 +1,16 @@
 var $ = require('jquery');
 
-var AppMode = function (polyglot, graph) {
+var AppMode = function (graph) {
     'use strict';
-
-    this.polyglot = polyglot;
+    this.status = {titleId: '', descId: ''};
     this.graph = graph;
 };
 
 AppMode.prototype = {
     constructor: AppMode,
-    detach: function () {console.log('did it?')},
-    triggerStatusUpdate: function (desc, title) {
+    detach: function () {},
+    triggerStatusUpdate: function () {
         var event = $.Event('status-update');
-        event.status = {
-            desc: desc,
-            title: title
-        };
         $(window).trigger(event);
     }
 };

@@ -1,10 +1,10 @@
 var $ = require('jquery');
 var AppMode = require('./app-mode');
 
-var Guide = function (polyglot, graph) {
+var Guide = function (graph) {
     'use strict';
 
-    AppMode.call(this, polyglot, graph);
+    AppMode.call(this, graph);
 
     this.step = 0;
     var self = this;
@@ -12,9 +12,9 @@ var Guide = function (polyglot, graph) {
         self.guide = data;
         self.showStep();
     }).done(function () {
-        self.triggerStatusUpdate(
-            self.polyglot.t('guide.instruction.0'),
-            self.polyglot.t('guide.title'));
+        self.status.titleId = 'guide.title';
+        self.status.descId = 'guide.instruction.0';
+        self.triggerStatusUpdate();
     });
 };
 
@@ -30,7 +30,7 @@ Guide.prototype.next = function () {
     this.step++;
     this.showStep();
 
-    return this.step == this.guide.steps.length-1;
+    return this.step == this.guide.steps.length - 1;
 };
 
 Guide.prototype.previous = function () {
@@ -46,7 +46,8 @@ Guide.prototype.showStep = function () {
     this.graph.remove(this.graph.elements());
     this.graph.add(this.guide.steps[this.step]);
     this.graph.layout();
-    this.triggerStatusUpdate(this.polyglot.t('guide.instruction.' + this.step));
+    this.status.descId = 'guide.instruction.' + this.step;
+    this.triggerStatusUpdate();
 };
 
 module.exports = Guide;
