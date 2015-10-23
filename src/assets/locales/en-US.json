@@ -9,8 +9,7 @@
   },
   "sandbox": {
     "title": "Free Simulation",
-    "statusDesc": {
-      "ok": "There are no deadlocks"
-    }
+    "ok": "There are no deadlocks",
+    "dead": "There are deadlocks"
   }
 }

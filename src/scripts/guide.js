@@ -7,24 +7,18 @@ var Guide = function (graph) {
     AppMode.call(this, graph);
 
     this.step = 0;
+    this.status.titleId = 'guide.title';
+    this.status.descId = 'guide.instruction.0';
+
     var self = this;
     $.getJSON('assets/guide.json', function (data) {
         self.guide = data;
         self.showStep();
-    }).done(function () {
-        self.status.titleId = 'guide.title';
-        self.status.descId = 'guide.instruction.0';
-        self.triggerStatusUpdate();
     });
 };
 
 Guide.prototype = Object.create(AppMode.prototype);
 Guide.prototype.constructor = Guide;
-
-//var base_detach = Guide.prototype.detach;
-//Guide.prototype.detach = function () {
-//    base_detach.call(this);
-//};
 
 Guide.prototype.next = function () {
     this.step++;

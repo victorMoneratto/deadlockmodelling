@@ -11,8 +11,11 @@ var Sandbox = function (graph, cytoscape) {
 
     this.lastProcessId = -1;
     this.lastResourceId = 0;
-    var self = this;
+    this.hasDeadlock = false;
+    this.status.titleId = 'sandbox.title';
+    this.status.descId = 'sandbox.ok';
 
+    var self = this;
     function removeOthersEdgesHolding(resource, addedEdge) {
         var edges = resource.neighborhood('edge');
         for (var iEdge = 0; iEdge < edges.length; ++iEdge) {
@@ -93,14 +96,12 @@ var Sandbox = function (graph, cytoscape) {
     this.graph.on('click', 'node', function (event) {
         if (event.originalEvent.detail >= 2) {
             self.graph.remove(event.cyTarget);
-            self.graph.elements().removeClass('dead');
             self.FindSCC();
         }
     });
     this.graph.on('click', 'edge', function (event) {
         if (event.originalEvent.detail >= 2) {
             self.graph.remove(event.cyTarget);
-            self.graph.elements().removeClass('dead');
             self.FindSCC();
         }
     });
@@ -134,54 +135,52 @@ Sandbox.prototype.detach = function () {
     this.graph.edgehandles('destroy');
 };
 
-Sandbox.prototype.FindSCC = function (v) {
-    var identified = {},
-        stack      = [],
-        index      = {},
-        boundaries = [];
-
-    var dfs = function (v) {
-        index[v.id()] = stack.length;
-        stack.push(v);
-        boundaries.push(index[v.id()]);
-
-        v.neighborhood('edge').each(function (i, e) {
-            if (e.source() != v) return true;
-            var w = e.target();
-
-            if (index[w.id()] === undefined) {
-                dfs(w);
-            } else if (identified[w.id()] === undefined) {
-                while (index[w.id()] < boundaries[boundaries.length - 1]) {
-                    boundaries.pop();
+Sandbox.prototype.FindSCC = function () {
+    var visited = {};
+    var dfs = function (v, start) {
+        visited[v.id()] = true;
+        var edges = v.neighborhood('edge');
+        for (var i = 0; i < edges.length; ++i) {
+            if (edges[i].source() != v) continue;
+            var w = edges[i].target();
+            if (w.id() === start.id()) {
+                return true;
+            }
+            if (visited[w.id()] === undefined) {
+                if(dfs(w, start)){
+                    return true;
                 }
             }
-        });
-
-        if (boundaries[boundaries.length - 1] === index[v.id()]) {
-            boundaries.pop();
-            var nodes = [];
-            var node;
-            while ((node = stack.pop()) != v) {
-                nodes.push(node);
-                identified[node.id()] = true;
-            }
-            if (nodes.length > 0) {
-                nodes.push(v);
-                identified[v.id()] = true;
-            }
-            return nodes;
         }
+        return false;
     };
 
+    this.hasDeadlock = false;
+    var self = this;
     this.graph.elements('node').each(function (ignored, v) {
-        var dead = dfs(v);
-        if (dead != undefined) {
-            for (var i = 0; i < dead.length; ++i) {
-                dead[i].addClass('dead');
-            }
+        visited = {};
+        var isDead = dfs(v, v);
+        if (isDead) {
+            self.hasDeadlock = true;
+            v.addClass('dead');
+        } else {
+            v.removeClass('dead');
         }
     });
+    var edges = this.graph.elements('edge');
+    for(var i = 0; i < edges.length; ++i){
+        var src = edges[i].source(),
+            dst = edges[i].target();
+        if(src.hasClass('dead') && dst.hasClass('dead')) {
+            edges[i].addClass('dead');
+        } else {
+            edges[i].removeClass('dead');
+        }
+    }
+
+    self.status.titleId = 'sandbox.title';
+    self.status.descId = self.hasDeadlock? 'sandbox.dead' : 'sandbox.ok';
+    self.triggerStatusUpdate();
 };
 
 

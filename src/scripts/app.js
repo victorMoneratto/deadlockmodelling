@@ -56,8 +56,13 @@ function App() {
             })
             .selector('node.dead')
             .css({
-                'border-width': 6,
-                'border-color': 'red'
+                //'border-width': 6,
+                //'border-color': 'red'
+            })
+            .selector('edge.dead')
+            .css({
+                'line-color': 'red',
+                'target-arrow-color': 'red'
             })
     });
 
@@ -110,6 +115,7 @@ App.prototype.setActiveMode = function (newMode) {
     this.graph.remove(this.graph.elements());
 
     this.activeMode = newMode;
+    this.updateStatus();
 };
 
 App.prototype.updateStatus = function () {
