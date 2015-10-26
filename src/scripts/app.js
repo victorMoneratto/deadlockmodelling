@@ -26,6 +26,7 @@ function App() {
     cytoscape.registerJquery($);
 
     this.graphContainer.cytoscape({
+        wheelSensitivity: 0.15,
         style: cytoscape.stylesheet()
             .selector('node')
             .css({
@@ -144,34 +145,39 @@ App.prototype.nextStep = function () {
         }
     }
 };
-
+var isLoaded = false;
 App.prototype.router = function () {
-    switch (location.hash) {
-        case '#guide':
-            this.setGuideMode();
-            break;
-        case '#guide/previous':
-            this.previousStep();
-            break;
-        case '#guide/next':
-            this.nextStep();
-            break;
-        case '#sandbox':
+    if(!isLoaded) {
+        if(location.hash === "#sandbox") {
             this.setSandboxMode();
-            break;
-        case '#translate':
-            this.translate();
-            break;
-        case '#translate/pt-BR':
-            this.translate('pt-BR');
-            break;
-        case '#translate/en-US':
-            this.translate('en-US');
-            break;
-        default:
+        }
+        else
+        {
             this.setGuideMode();
-            break;
+        }
     }
+    else {
+        switch (location.hash) {
+            case '#':
+                break;
+            case '#guide':
+                this.setGuideMode();
+                break;
+            case '#sandbox':
+                this.setSandboxMode();
+                break;
+            case '#translate':
+                this.translate();
+                break;
+            case '#translate/pt-BR':
+                this.translate('pt-BR');
+                break;
+            case '#translate/en-US':
+                this.translate('en-US');
+                break;
+        }
+    }
+    isLoaded = true
 };
 
 var app;
@@ -183,6 +189,13 @@ $(function () {
     window.addEventListener('hashchange', function () {
         app.router();
     }, false);
+
+    app.pagerNext.click(function () {
+        app.nextStep();
+    });
+    app.pagerPrevious.click(function () {
+        app.previousStep();
+    })
 });
 
 $(window).on('status-update', function (event) {

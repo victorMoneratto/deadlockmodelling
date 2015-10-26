@@ -3,8 +3,19 @@
   "guide": {
     "title": "Guided Simulation",
     "instruction": {
-      "0": "<strong>A</strong>, <strong>B</strong> and <strong>C</strong> are <em>processes<em>",
-      "1": "<strong>X</strong>, <strong>Y</strong> and <strong>Z</strong> are <em>resources<em>"
+      "0" : "<strong>A</strong>, <strong>B</strong> and <strong>C</strong> are <em>processes<em>",
+      "1" : "<strong>X</strong>, <strong>Y</strong> and <strong>Z</strong> are <em>resources<em>",
+      "2" : "Edges from a <strong>processes</strong> to <strong>resources</strong> are <strong>requests</strong> for resources by processes",
+      "3" : "Edges from a <strong>resources</strong> to <strong>processes</strong> are <strong>ownerships</strong> of resources by processes",
+      "4" : "When there is a cycle a <strong>deadlock</strong> occurred and the edges turn <strong>red</strong>",
+      "5" : "Now imagine a situation with six processes and six resources",
+      "6" : "<ol><li>A requests X</li></ol>",
+      "7" : "<ol><li>A requests X</li><li>Now A owns X</li></ol>",
+      "8" : "<ol><li>A requests X</li><li>Now A owns X</li><li>B and C request Y and Z respectively</li></ol>",
+      "9" : "<ol><li>A requests X</li><li>Now A owns X</li><li>B and C request Y and Z respectively</li><li>B and C own Y and Z respectively</li></ol>",
+      "10": "<ol><li>A requests X</li><li>Now A owns X</li><li>B and C request Y and Z respectively</li><li>B and C own Y and Z respectively</li><li>A requests Y, notice A has to wait for B to release Y</li></ol>",
+      "11": "<ol><li>A requests X</li><li>Now A owns X</li><li>B and C request Y and Z respectively</li><li>B and C own Y and Z respectively</li><li>A requests Y, notice A has to wait for B to release Y</li><li>B and C request Y and Z respectively, notice that like A, B and C have to wait for another process</li></ol>",
+      "12": "<ol><li>A requests X</li><li>Now A owns X</li><li>B and C request Y and Z respectively</li><li>B and C own Y and Z respectively</li><li>A requests Y, notice A has to wait for B to release Y</li><li>B and C request Y and Z respectively, notice that like A, B and C have to wait for another process</li><li>Now if C requests X we have a cycle, therefore, a deadlock</ol>"
     }
   },
   "sandbox": {

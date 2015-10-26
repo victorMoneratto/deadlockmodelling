@@ -19,6 +19,166 @@
         {"data": {"name": "Z"}, "classes": "resource"}
       ],
       "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "A", "target": "Z"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "Z", "target": "A"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "A", "target": "Z"}},
+        {"data": {"source": "Z", "target": "B"}},
+        {"data": {"source": "B", "target": "Y"}},
+        {"data": {"source": "Y", "target": "A"}}
+      ],
+      "layout":{"name": "circle", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "A", "target": "X"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}},
+        {"data": {"source": "B", "target": "Y"}},
+        {"data": {"source": "C", "target": "Z"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}},
+        {"data": {"source": "Y", "target": "B"}},
+        {"data": {"source": "Z", "target": "C"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}},
+        {"data": {"source": "A", "target": "Y"}},
+        {"data": {"source": "Y", "target": "B"}},
+        {"data": {"source": "Z", "target": "C"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}},
+        {"data": {"source": "A", "target": "Y"}},
+        {"data": {"source": "Y", "target": "B"}},
+        {"data": {"source": "B", "target": "Z"}},
+        {"data": {"source": "Z", "target": "C"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
+    },
+    {
+      "nodes": [
+        {"data": {"name": "A", "id": "A"}, "classes": "process"},
+        {"data": {"name": "B", "id": "B"}, "classes": "process"},
+        {"data": {"name": "C", "id": "C"}, "classes": "process"},
+        {"data": {"name": "X", "id": "X"}, "classes": "resource"},
+        {"data": {"name": "Y", "id": "Y"}, "classes": "resource"},
+        {"data": {"name": "Z", "id": "Z"}, "classes": "resource"}
+      ],
+      "edges": [
+        {"data": {"source": "X", "target": "A"}},
+        {"data": {"source": "A", "target": "Y"}},
+        {"data": {"source": "Y", "target": "B"}},
+        {"data": {"source": "B", "target": "Z"}},
+        {"data": {"source": "Z", "target": "C"}},
+        {"data": {"source": "C", "target": "X"}}
+      ],
+      "layout":{"name": "grid", "padding": "100", "fit": "true"}
     }
   ]
 }

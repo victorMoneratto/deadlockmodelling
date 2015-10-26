@@ -39,8 +39,9 @@ Guide.prototype.showStep = function () {
 
     this.graph.remove(this.graph.elements());
     this.graph.add(this.guide.steps[this.step]);
-    this.graph.layout();
+    this.graph.layout({name: this.guide.steps[this.step].layout.name});
     this.status.descId = 'guide.instruction.' + this.step;
+    this.FindSCC();
     this.triggerStatusUpdate();
 };
 

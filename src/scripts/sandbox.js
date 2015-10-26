@@ -11,7 +11,6 @@ var Sandbox = function (graph, cytoscape) {
 
     this.lastProcessId = -1;
     this.lastResourceId = 0;
-    this.hasDeadlock = false;
     this.status.titleId = 'sandbox.title';
     this.status.descId = 'sandbox.ok';
 
@@ -135,52 +134,12 @@ Sandbox.prototype.detach = function () {
     this.graph.edgehandles('destroy');
 };
 
+var base_FindSCC = Sandbox.prototype.FindSCC;
 Sandbox.prototype.FindSCC = function () {
-    var visited = {};
-    var dfs = function (v, start) {
-        visited[v.id()] = true;
-        var edges = v.neighborhood('edge');
-        for (var i = 0; i < edges.length; ++i) {
-            if (edges[i].source() != v) continue;
-            var w = edges[i].target();
-            if (w.id() === start.id()) {
-                return true;
-            }
-            if (visited[w.id()] === undefined) {
-                if(dfs(w, start)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    };
-
-    this.hasDeadlock = false;
-    var self = this;
-    this.graph.elements('node').each(function (ignored, v) {
-        visited = {};
-        var isDead = dfs(v, v);
-        if (isDead) {
-            self.hasDeadlock = true;
-            v.addClass('dead');
-        } else {
-            v.removeClass('dead');
-        }
-    });
-    var edges = this.graph.elements('edge');
-    for(var i = 0; i < edges.length; ++i){
-        var src = edges[i].source(),
-            dst = edges[i].target();
-        if(src.hasClass('dead') && dst.hasClass('dead')) {
-            edges[i].addClass('dead');
-        } else {
-            edges[i].removeClass('dead');
-        }
-    }
-
-    self.status.titleId = 'sandbox.title';
-    self.status.descId = self.hasDeadlock? 'sandbox.dead' : 'sandbox.ok';
-    self.triggerStatusUpdate();
+    base_FindSCC.call(this);
+    this.status.titleId = 'sandbox.title';
+    this.status.descId = this.hasDeadlock? 'sandbox.dead' : 'sandbox.ok';
+    this.triggerStatusUpdate();
 };
 
 
