@@ -19,7 +19,7 @@ function App() {
 
     //init polyglot and start localization
     this.polyglot = new Polyglot();
-    this.locale = 'en-US';
+    this.locale = 'pt-BR';
     this.translate();
 
     //init cytoscape

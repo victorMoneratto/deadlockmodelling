@@ -1,3 +1,40 @@
 {
-  "title": "Modelagem em Deadlock"
+  "title": "Modelagem de Deadlocks",
+  "guide": {
+    "title": "Simulação Guiada",
+    "instruction": {
+      "0" : "<strong>A</strong>, <strong>B</strong> e <strong>C</strong> são <em>processos<em>",
+      "1" : "<strong>X</strong>, <strong>Y</strong> e <strong>Z</strong> são <em>recursos<em>",
+      "2" : "Setas de um <strong>processo</strong> para um <strong>recurso</strong> são <strong>requisições</strong> de recursos para processos",
+      "3" : "Setas de um  <strong>recurso</strong> para um <strong>processo</strong> são <strong>posses</strong> de recursos para processos",
+      "4" : "Agora imagine uma situação com <strong>três</strong> <em>processos</em> e <strong>três</strong> <em>recursos</em>",
+      "5" : "<ol><li>A requisita X</li></ol>",
+      "6" : "<ol><li>A requisita X</li><li>Agora A possue X</li></ol>",
+      "7" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>B e C requisitam Y e Z, respectivamente</li></ol>",
+      "8" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>B e C requisitam Y e Z, respectivamente</li><li>B e C possuem Y e Z, respectivamente</li></ol>",
+      "9": "<ol><li>A requisita X</li><li>Agora A possue X</li><li>B e C requisitam Y e Z, respectivamente</li><li>B e C possuem Y e Z, respectivamente</li><li>A requisita Y, perceba que A precisa esperar que B libere Y</li></ol>",
+      "10": "<ol><li>A requisita X</li><li>Agora A possue X</li><li>B e C requisitam Y e Z, respectivamente</li><li>B e C possuem Y e Z, respectivamente</li><li>A requisita Y, perceba que A precisa esperar que B libere Y</li><li>B requisita Z, perceba como A e B precisam esperar por outro processo</li></ol>",
+      "11": "<ol><li>A requisita X</li><li>Agora A possue X</li><li>B e C requisitam Y e Z, respectivamente</li><li>B e C possuem Y e Z, respectivamente</li><li>A requisita Y, perceba que A precisa esperar que B libere Y</li><li>B requisita Z, perceba como A e B precisam esperar por outro processo</li><li>Agora, se C requisitar X teremos um ciclo, ou seja, um <strong>deadlock</strong></li></ol> <p>Quando ocorre um ciclo no grafo isso simboliza que os processos envolvidos necessitam de recursos que estão alocados para outros processos, esses os quais estão na mesma situação, o que define um <strong>deadlock</strong></p>",
+      "12": "Na requisição de recursos, a ordem das requisições é muito importante. Vejamos o que aconteceria no caso anterior se as requisições fossem feitas em outra ordem",
+      "13" : "<ol><li>A requisita X</li></ol>",
+      "14" : "<ol><li>A requisita X</li><li>Agora A possue X</li></ol>",
+      "15" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li></ol>",
+      "16" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li></ol>",
+      "17" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li></ol>",
+      "18" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li></ol>",
+      "19" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li></ol>",
+      "20" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li></ol>",
+      "21" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li></ol>",
+      "22" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li></ol>",
+      "23" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li></ol>",
+      "24" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li><li>C possue Z, já que Z foi liberado por B, e X, que foi liberado por A</li></ol>",
+      "25" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li><li>C possue Z, já que Z foi liberado por B, e X, que foi liberado por A</li><li>C tem todos os recursos que precisa, C usa os recursos e os libera</li></ol>",
+      "26" : "Percebam que nesse caso <strong>não houve deadlocks</strong>, pois, na ordem que foram feitas, as requisições não geraram ciclos. Isso nos mostra, claramente, que a ordem em que as requisições são feitas é muito importante"
+    }
+  },
+  "sandbox": {
+    "title": "Simulação Livre",
+    "ok": "Não há deadlocks",
+    "dead": "Há deadlocks"
+  }
 }
