@@ -9,6 +9,20 @@ html(lang='en')
         .jumbotron
             .container
                 h1#title
+
+                ul.nav.nav-pills
+                    li(role="presentation").active
+                        a(href="#guide")
+                            span#menu-guide-label
+                    li(role="presentation")
+                        a(href="#sandbox")
+                            span#menu-sandbox-label
+                    li.pull-right
+                        h2(style="margin:0")
+                            a(href="#translate/en-US")
+                                span(style="border-radius: 5px").flag-icon.flag-icon-us
+                            a(href="#translate/pt-BR")
+                                span(style="border-radius: 5px").flag-icon.flag-icon-br
         #content.container
             #status-panel.panel.panel-primary
                 #status-title.panel-heading
@@ -18,18 +32,18 @@ html(lang='en')
                         li#pager-previous.previous.hidden
                             a(href='#')
                                 span.glyphicon.glyphicon-menu-left
-                                | Anterior
+                                span#previous-label
                         li#pager-startGuide.previous.hidden
                             a(href='#guide')
                                 span.glyphicon.glyphicon-menu-left
-                                | Voltar ao Guia
+                                span#back-to-guide-label
                         li#pager-next.next.hidden
                             a(href='#')
-                                | Próximo
+                                span#next-label
                                 span.glyphicon.glyphicon-menu-right
                         li#pager-finishGuide.next.hidden
                             a(href='#sandbox')
-                                | Finalizar
+                                span#finish-label
                                 span.glyphicon.glyphicon-ok
                 #graph-container
         script(src='scripts/app.js')

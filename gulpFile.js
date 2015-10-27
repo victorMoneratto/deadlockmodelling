@@ -76,7 +76,8 @@ gulp.task('sass', function () {
         .pipe(plumber())
         .pipe(sass({
             style: 'compressed', loadPath: [
-                'lib/bootstrap-sass-official/assets/stylesheets'
+                'lib/bootstrap-sass-official/assets/stylesheets',
+                'lib/flag-icon-css/sass'
             ]
         }))
         .pipe(prefix('last 2 version'))

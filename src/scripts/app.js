@@ -16,6 +16,12 @@ function App() {
     this.pagerFinishGuide = $("#pager-finishGuide");
     this.statusTitle = $('#status-title');
     this.statusDesc = $("#status-desc");
+    this.previousLabel = $("#previous-label");
+    this.backToGuideLabel = $("#back-to-guide-label");
+    this.nextLabel = $("#next-label");
+    this.finishLabel = $("#finish-label");
+    this.menuGuideLabel = $("#menu-guide-label");
+    this.menuSandboxLabel = $("#menu-sandbox-label");
 
     //init polyglot and start localization
     this.polyglot = new Polyglot();
@@ -83,8 +89,15 @@ App.prototype.translate = function (locale) {
 
         document.title = self.polyglot.t('title');
         self.pageTitle.html(document.title);
-        app.statusTitle.html(self.polyglot.t(self.activeMode.status.titleId));
-        app.statusDesc.html(self.polyglot.t(self.activeMode.status.descId));
+        self.statusTitle.html(self.polyglot.t(self.activeMode.status.titleId));
+        self.statusDesc.html(self.polyglot.t(self.activeMode.status.descId));
+
+        self.previousLabel.html(self.polyglot.t('previousLabel'));
+        self.backToGuideLabel.html(self.polyglot.t('backToGuideLabel'));
+        self.nextLabel.html(self.polyglot.t('nextLabel'));
+        self.finishLabel.html(self.polyglot.t('finishLabel'));
+        self.menuGuideLabel.html(self.polyglot.t('menuGuideLabel'));
+        self.menuSandboxLabel.html(self.polyglot.t('menuSandboxLabel'));
     }).always(function () {
         self.graph.resize();
     });

@@ -1,5 +1,11 @@
 {
   "title": "Modelagem de Deadlocks",
+  "menuGuideLabel" : "Guia",
+  "menuSandboxLabel" : "Simulação Livre",
+  "previousLabel" : "Anterior",
+  "backToGuideLabel" : "Voltar ao Modo Guiado",
+  "nextLabel" : "Próximo",
+  "finishLabel" : "Finalizar",
   "guide": {
     "title": "Simulação Guiada",
     "instruction": {
@@ -29,7 +35,7 @@
       "23" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li></ol>",
       "24" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li><li>C possue Z, já que Z foi liberado por B, e X, que foi liberado por A</li></ol>",
       "25" : "<ol><li>A requisita X</li><li>Agora A possue X</li><li>A requisita Y</li><li>Agora A possue Y</li><li>B requisita Y, perceba que B deve esperar que A libere Y</li><li>A tem todos os recursos que precisa, A usa os recursos e os libera</li><li>B possue Y, já que Y foi liberado por A</li><li>B requisita Z</li><li>B possue Z</li><li>B tem todos os recursos que precisa, B usa os recursos e os libera</li><li>C requisita os recursos Z e X</li><li>C possue Z, já que Z foi liberado por B, e X, que foi liberado por A</li><li>C tem todos os recursos que precisa, C usa os recursos e os libera</li></ol>",
-      "26" : "Percebam que nesse caso <strong>não houve deadlocks</strong>, pois, na ordem que foram feitas, as requisições não geraram ciclos. Isso nos mostra, claramente, que a ordem em que as requisições são feitas é muito importante"
+      "26" : "Percebam que nesse caso <strong>não houve deadlock</strong>, pois, na ordem que foram feitas, as requisições não geraram ciclos. Isso nos mostra, claramente, que a ordem em que as requisições são feitas é muito importante"
     }
   },
   "sandbox": {
