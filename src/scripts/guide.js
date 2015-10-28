@@ -8,7 +8,7 @@ var Guide = function (graph) {
 
     this.step = 0;
     this.status.titleId = 'guide.title';
-    this.status.howToUseId = 'guide.howToUse';
+    //this.status.howToUseId = 'guide.howToUse';
     this.status.descId = 'guide.instruction.0';
 
     var self = this;

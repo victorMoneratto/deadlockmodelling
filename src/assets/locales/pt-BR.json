@@ -43,7 +43,7 @@
   },
   "sandbox": {
     "title": "Simulação Livre",
-    "howToUse":  "<ul><li>Clique duas vezes no vazio para criar um processo</li><li>Ctrl + clique duas vezes no vazio para criar um recurso</li><li>Clique com o botão direito num processo, segure e solte em um recurso para criar um requisição</li><li>Clique com o botão direito do mouse num recurso, segure e solte em um processo para atribuir posse</li><li>Clique duas vezes em um processo, um rescurso, uma requisição ou uma posse para deletá-la</ul>",
+    "howToUse":  "<ul class=\"list-inline text-center\"><li><kbd>Clique Duplo</kbd>: criar processo</li><li><kbd>Ctrl+Clique Duplo</kbd>: criar recurso</li><li><kbd>Arraste Botão Direito</kbd>: fazer ligação</li><li><kbd>Clique Duplo</kbd>: deletar elemento</li></ul>",
     "ok": "<strong>Não</strong> há deadlock",
     "dead": "Há processos em <strong>deadlock</strong>"
   }

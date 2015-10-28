@@ -41,7 +41,7 @@
   },
   "sandbox": {
     "title": "Free Simulation",
-    "howToUse" : "<ul><li>Double click on the canvas to create a process</li><li>Ctrl + double click on the canvas to create a resource</li><li>Right click and hold on a process and release on a resource to create a request</li><li>Right click and hold on a resource and release on a process to attribute ownership</li><li>Double click on a process, a resource, a request or an ownership to delete it</ul>",
+    "howToUse":  "<ul class=\"list-inline text-center\"><li><kbd>Double Click</kbd>: create process</li><li><kbd>Ctrl+Double Click</kbd>: create resource</li><li><kbd>Drag Right Button</kbd>: connect nodes</li><li><kbd>Double Click</kbd>: delete element</li></ul>",
     "ok": "There is <strong>no</strong> deadlock",
     "dead": "There are processes in deadlock"
   }
