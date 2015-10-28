@@ -23,6 +23,8 @@ function App() {
     this.menuGuideLabel = $("#menu-guide-label");
     this.menuSandboxLabel = $("#menu-sandbox-label");
     this.howToUse = $("#how-to-use");
+    this.explanationTitle = $('#explanation-title');
+    this.explanationContent = $('#explanation-content');
 
     //init polyglot and start localization
     this.polyglot = new Polyglot();
@@ -100,6 +102,8 @@ App.prototype.translate = function (locale) {
         self.menuGuideLabel.html(self.polyglot.t('menuGuideLabel'));
         self.menuSandboxLabel.html(self.polyglot.t('menuSandboxLabel'));
         self.howToUse.html(self.polyglot.t(self.activeMode.status.howToUseId));
+        self.explanationTitle.html(self.polyglot.t('explanationTitle'));
+        self.explanationContent.html(self.polyglot.t('explanationContent'));
     }).always(function () {
         self.graph.resize();
     });

@@ -4,8 +4,8 @@
   "menuSandboxLabel" : "Simulação Livre",
   "previousLabel" : "Anterior",
   "backToGuideLabel" : "Voltar à Simulação Guiada",
-
-
+  "explanationTitle": "Explicação",
+  "explanationContent": "<div class='row'> <p>Um conjunto de processos está em deadlock se cada processo no conjunto está esperando por um evento que apenas outro processo no conjunto pode causar. Como todos os processos estão esperando, nenhum deles pode gerar o evento que o outro processo precisa, ou seja, ficam em deadlock. Para que deadlocks ocorram, existem quatro condições necessárias:</p> <ul> <li>Exclusão mútua </li> <li>Posse e espera </li> <li>Não-preempção </li> <li>Espera circular </li> </ul> <p>Richard C. Holt mostrou como essas condições podem ser modeladas usando grafos direcionados. Esse REA foi desenvolvido baseando-se no modelo de Holt.</p> <p>No REA há duas simulações, 'Simulação Guiada' e 'Simulação Livre'. A 'Simulação Guiada' tem seu foco em ensinar as representações dos conceitos (processo, recurso, posse, etc) ao usuário e de dar exemplos de casos onde há ou não deadlocks. A 'Simulação Livre' permite ao usuário criar seus próprios estados e perceber se eles resultam ou não em deadlocks.</p> </div>",
   "nextLabel" : "Próximo",
   "finishLabel" : "Ir à Simulação Livre",
   "guide": {

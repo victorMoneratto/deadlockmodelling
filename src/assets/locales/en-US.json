@@ -4,9 +4,11 @@
   "menuGuideLabel" : "Guided Simulation",
   "menuSandboxLabel" : "Free Simulation",
   "previousLabel" : "Previous",
-  "backToGuideLabel" : "Back to Guide Mode",
+  "backToGuideLabel" : "Back to Guided Simulation",
   "nextLabel" : "Next",
   "finishLabel" : "Go to Free Simulation",
+  "explanationTitle": "Explanation",
+  "explanationContent": "<div class='row'><p>A set of processes are deadlocked if each process in the set is waiting for an event that only another process in the set can generate. How all the processes are waiting, none of the them can generate the event the other process needs. All the processes remain stuck, therefore deadlocked. A deadlock occurs whenever the following four conditions are met: </p><ol> <li> Mutual exclusion. </li> <li> Hold an wait. </li> <li> Non preeptive. </li> <li> Circular wait. </li> </ol> <p>Richard C. Holt showed how these conditions can be modeled using directed graphs. This OER was developed based on his model.</p><p>The OER has two simulations, the 'Guided Simulation' and 'Free Simulation'. The Guided Simulation will teach how processes, resources, requests and ownerships are represented in the model, and show examples step by step how deadlocks may or may not occur. The Free Simulation will allow the user to create his own states and see if a deadlock will occur</p> </div>",
   "guide": {
     "title": "Guided Simulation",
     "instruction": {
