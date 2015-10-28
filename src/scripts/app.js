@@ -22,6 +22,7 @@ function App() {
     this.finishLabel = $("#finish-label");
     this.menuGuideLabel = $("#menu-guide-label");
     this.menuSandboxLabel = $("#menu-sandbox-label");
+    this.howToUse = $("#how-to-use");
 
     //init polyglot and start localization
     this.polyglot = new Polyglot();
@@ -98,6 +99,7 @@ App.prototype.translate = function (locale) {
         self.finishLabel.html(self.polyglot.t('finishLabel'));
         self.menuGuideLabel.html(self.polyglot.t('menuGuideLabel'));
         self.menuSandboxLabel.html(self.polyglot.t('menuSandboxLabel'));
+        self.howToUse.html(self.polyglot.t(self.activeMode.status.howToUseId));
     }).always(function () {
         self.graph.resize();
     });
@@ -106,8 +108,8 @@ App.prototype.translate = function (locale) {
 App.prototype.setSandboxMode = function () {
     this.pagerStartGuide.removeClass('hidden');
     this.pagerFinishGuide.addClass('hidden');
+    this.pagerNext.addClass('hidden');
     this.pagerPrevious.addClass('hidden');
-
     this.setActiveMode(new Sandbox(this.graph, cytoscape))
 };
 
@@ -117,7 +119,6 @@ App.prototype.setGuideMode = function () {
 
     this.pagerFinishGuide.addClass('hidden');
     this.pagerNext.removeClass('hidden');
-
     this.setActiveMode(new Guide(this.graph))
 };
 
@@ -135,6 +136,7 @@ App.prototype.setActiveMode = function (newMode) {
 App.prototype.updateStatus = function () {
     app.statusTitle.html(this.polyglot.t(this.activeMode.status.titleId));
     app.statusDesc.html(this.polyglot.t(this.activeMode.status.descId));
+    app.howToUse.html(this.polyglot.t(this.activeMode.status.howToUseId));
 
     this.graph.resize();
 };
@@ -159,7 +161,7 @@ App.prototype.nextStep = function () {
     }
 };
 var isLoaded = false;
-App.prototype.router = function () {
+App.prototype.router = function (e) {
     if(!isLoaded) {
         if(location.hash === "#sandbox") {
             this.setSandboxMode();
@@ -203,7 +205,7 @@ $(function () {
         app.router();
     }, false);
 
-    app.pagerNext.click(function () {
+    app.pagerNext.click(function (){
         app.nextStep();
     });
     app.pagerPrevious.click(function () {

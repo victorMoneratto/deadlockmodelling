@@ -4,12 +4,10 @@ html(lang='en')
     title
 
     link(href='styles/app.css' rel='styleSheet')
-
     body
         .jumbotron
             .container
                 h1#title
-
                 ul.nav.nav-pills
                     li(role="presentation").active
                         a(href="#guide")
@@ -26,11 +24,13 @@ html(lang='en')
         #content.container
             #status-panel.panel.panel-primary
                 #status-title.panel-heading
-                #status-desc.panel-body
+                .panel-body
+                    p#status-desc.text-center
+                    //p#how-to-use.text-center
                 .panel-footer
                     ul.pager
                         li#pager-previous.previous.hidden
-                            a(href='#')
+                            a(role='button')
                                 span.glyphicon.glyphicon-menu-left
                                 span#previous-label
                         li#pager-startGuide.previous.hidden
@@ -38,7 +38,7 @@ html(lang='en')
                                 span.glyphicon.glyphicon-menu-left
                                 span#back-to-guide-label
                         li#pager-next.next.hidden
-                            a(href='#')
+                            a(role='button')
                                 span#next-label
                                 span.glyphicon.glyphicon-menu-right
                         li#pager-finishGuide.next.hidden
@@ -46,4 +46,5 @@ html(lang='en')
                                 span#finish-label
                                 span.glyphicon.glyphicon-ok
                 #graph-container
+
         script(src='scripts/app.js')

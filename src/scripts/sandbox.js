@@ -13,6 +13,7 @@ var Sandbox = function (graph, cytoscape) {
     this.lastResourceId = 0;
     this.status.titleId = 'sandbox.title';
     this.status.descId = 'sandbox.ok';
+    this.status.howToUseId = 'sandbox.howToUse';
 
     var self = this;
     function removeOthersEdgesHolding(resource, addedEdge) {

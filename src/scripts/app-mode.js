@@ -2,7 +2,7 @@ var $ = require('jquery');
 
 var AppMode = function (graph) {
     'use strict';
-    this.status = {titleId: '', descId: ''};
+    this.status = {titleId: '', descId: '', howToUseId: ''};
     this.graph = graph;
     this.hasDeadlock = false;
 };
