@@ -6,6 +6,10 @@ var AppMode = require('./app-mode');
 var Guide = require('./guide');
 var Sandbox = require('./sandbox');
 
+
+    // $flag-icon-css-path: '../assets/images'
+    // $flag-icon-rect-path: ''
+    // @import "flag-icon"
 function App() {
     //collect elements dom
     this.pageTitle = $('#title');
@@ -25,7 +29,11 @@ function App() {
     this.howToUse = $("#how-to-use");
     this.explanationTitle = $('#explanation-title');
     this.explanationContent = $('#explanation-content');
+    this.explanationContentContainer = $('#explanation-content-container');
+    this.hideContentButton = $('#hide-content-button');
 
+    this.closeAboutButton = $('#close-about-button');
+    this.aboutContainer = $('#about-container');
     //init polyglot and start localization
     this.polyglot = new Polyglot();
     this.locale = 'pt-BR';
@@ -104,6 +112,7 @@ App.prototype.translate = function (locale) {
         self.howToUse.html(self.polyglot.t(self.activeMode.status.howToUseId));
         self.explanationTitle.html(self.polyglot.t('explanationTitle'));
         self.explanationContent.html(self.polyglot.t('explanationContent'));
+        self.hideContentButton.html(self.polyglot.t('hideShowContentButton'));
     }).always(function () {
         self.graph.resize();
     });
@@ -135,6 +144,23 @@ App.prototype.setActiveMode = function (newMode) {
 
     this.activeMode = newMode;
     this.updateStatus();
+};
+
+App.prototype.setAbout = function () {
+    app.aboutContainer.removeClass("hide");
+}
+
+App.prototype.closeAbout = function () {
+    app.aboutContainer.addClass("hide");
+}
+
+App.prototype.hideContent = function () {
+    if (app.explanationContentContainer.hasClass("hide")) {
+        app.explanationContentContainer.removeClass("hide");
+    }
+    else {
+        app.explanationContentContainer.addClass("hide");
+    }
 };
 
 App.prototype.updateStatus = function () {
@@ -185,6 +211,9 @@ App.prototype.router = function (e) {
             case '#sandbox':
                 this.setSandboxMode();
                 break;
+            case '#about':
+                this.setAbout();
+                break;
             case '#translate':
                 this.translate();
                 break;
@@ -214,6 +243,12 @@ $(function () {
     });
     app.pagerPrevious.click(function () {
         app.previousStep();
+    });
+    app.hideContentButton.click(function () {
+        app.hideContent();
+    });
+    app.closeAboutButton.click(function () {
+        app.closeAbout();
     })
 });
 

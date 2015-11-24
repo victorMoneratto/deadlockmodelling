@@ -5,6 +5,41 @@ html(lang='en')
 
     link(href='styles/app.css' rel='styleSheet')
     body
+        #about-container.hide
+            .container#about-content
+                .row
+                    .col-lg-12
+                        a.glyphicon.glyphicon-remove.pull-right.padding-30#close-about-button(href="#")
+                        h2.page-header Sobre Nós
+                    .col.text-center
+                            h4
+                            | Esse REA foi desenvolvido para auxiliar alunos e professores a aprender sobre modelagem de 
+                            strong deadlocks
+                    
+                    .col-lg-3.col-sm-6.col-sm-offset-1.text-center
+                        img.img-circle.img-responsive.img-center(src="assets/images/monera.jpg")
+                        h3 Victor Augusto Moneratto Saia
+                        a(href="http://www.github.com/victormoneratto")
+                            h4
+                                object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
+                                | VictorMoneratto
+                    .col-lg-3.col-sm-6.text-center
+                        img.img-circle.img-responsive.img-center(src="assets/images/heclis.jpg")
+                        h3 Victor Hugo Heclis
+                        a(href="http://www.github.com/vheclis")
+                            h4
+                                object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
+                                | VHeclis
+                    .col-lg-3.col-sm-6.text-center
+                        img.img-circle.img-responsive.img-center(src="assets/images/nilson2.jpg")
+                        h3 Nilson Furquim da Silva
+                        a(href="http://www.github.com/nilfurquim")
+                            h4
+                                object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
+                                | NilFurquim
+                    .col.text-center
+                        object(data="assets/images/icmc.svg" type="image/svg+xml").padding-30
+                        object(data="assets/images/usp.svg" type="image/svg+xml").padding-30
         .jumbotron
             .container
                 h1#title
@@ -15,6 +50,9 @@ html(lang='en')
                     li(role="presentation")
                         a(href="#sandbox")
                             span#menu-sandbox-label
+                    li(role="presentation")
+                        a(href="#about")
+                            span#menu-about-label About
                     li.pull-right
                         h2(style="margin:0")
                             a(href="#translate/en-US")
@@ -23,8 +61,12 @@ html(lang='en')
                                 span(style="border-radius: 5px").flag-icon.flag-icon-br
         #content.container
             .page-header
+                .btn-group.pull-right
+                    button.btn#hide-content-button
+                        span.caret
                 h3#explanation-title
-            .quote
+
+            .quote#explanation-content-container
                 h5#explanation-content
             #status-panel.panel.panel-primary
                 #status-title.panel-heading
@@ -50,5 +92,6 @@ html(lang='en')
                                 span#finish-label
                                 span.glyphicon.glyphicon-ok
                 #graph-container
+
 
         script(src='scripts/app.js')
