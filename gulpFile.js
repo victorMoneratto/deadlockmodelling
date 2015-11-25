@@ -35,7 +35,7 @@ var config = {
     src: 'src',
     env: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     lib: 'lib/',
-    port: 1881
+    port: 8080
 };
 config.build = 'build/' + config.env;
 

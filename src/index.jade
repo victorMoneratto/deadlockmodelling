@@ -16,28 +16,28 @@ html(lang='en')
                             | Esse REA foi desenvolvido para auxiliar alunos e professores a aprender sobre modelagem de 
                             strong deadlocks
                     
-                    .col-lg-3.col-sm-6.col-sm-offset-1.text-center
+                    .col-lg-2.col-xs-4.col-sm-3.col-md-3.col-lg-offset-3.col-xs-offset-2.text-center
                         img.img-circle.img-responsive.img-center(src="assets/images/monera.jpg")
                         h3 Victor Augusto Moneratto Saia
                         a(href="http://www.github.com/victormoneratto")
                             h4
                                 object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
                                 | VictorMoneratto
-                    .col-lg-3.col-sm-6.text-center
+                    .col-lg-2.col-xs-4.col-sm-3.col-md-3.text-center
                         img.img-circle.img-responsive.img-center(src="assets/images/heclis.jpg")
                         h3 Victor Hugo Heclis
                         a(href="http://www.github.com/vheclis")
                             h4
                                 object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
                                 | VHeclis
-                    .col-lg-3.col-sm-6.text-center
+                    .col-lg-2.col-xs-4.col-sm-3.col-md-3.text-center
                         img.img-circle.img-responsive.img-center(src="assets/images/nilson2.jpg")
                         h3 Nilson Furquim da Silva
                         a(href="http://www.github.com/nilfurquim")
                             h4
                                 object(data="assets/images/GitHub-Mark.svg" type="image/svg+xml")
                                 | NilFurquim
-                    .col.text-center
+                    .col-lg-12.text-center
                         object(data="assets/images/icmc.svg" type="image/svg+xml").padding-30
                         object(data="assets/images/usp.svg" type="image/svg+xml").padding-30
         .jumbotron
@@ -52,7 +52,7 @@ html(lang='en')
                             span#menu-sandbox-label
                     li(role="presentation")
                         a(href="#about")
-                            span#menu-about-label About
+                            span#menu-about-label
                     li.pull-right
                         h2(style="margin:0")
                             a(href="#translate/en-US")
@@ -73,6 +73,10 @@ html(lang='en')
                 .panel-body
                     p#status-desc.text-center
                     p#how-to-use
+                    .btn-group.pull-right
+                            button.btn#help-button
+                    .container#help-content.hidden
+                    
                 .panel-footer
                     ul.pager
                         li#pager-previous.previous.hidden

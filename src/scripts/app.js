@@ -31,7 +31,10 @@ function App() {
     this.explanationContent = $('#explanation-content');
     this.explanationContentContainer = $('#explanation-content-container');
     this.hideContentButton = $('#hide-content-button');
-
+    this.helpButton = $('#help-button');
+    this.helpContent = $('#help-content');
+    
+    this.menuAboutLabel = $("#menu-about-label");
     this.closeAboutButton = $('#close-about-button');
     this.aboutContainer = $('#about-container');
     //init polyglot and start localization
@@ -113,6 +116,9 @@ App.prototype.translate = function (locale) {
         self.explanationTitle.html(self.polyglot.t('explanationTitle'));
         self.explanationContent.html(self.polyglot.t('explanationContent'));
         self.hideContentButton.html(self.polyglot.t('hideShowContentButton'));
+        self.menuAboutLabel.html(self.polyglot.t('aboutLabel'));
+        self.helpButton.html(self.polyglot.t('helpButton'));
+        self.helpContent.html(self.polyglot.t('helpContent'));
     }).always(function () {
         self.graph.resize();
     });
@@ -123,13 +129,15 @@ App.prototype.setSandboxMode = function () {
     this.pagerFinishGuide.addClass('hidden');
     this.pagerNext.addClass('hidden');
     this.pagerPrevious.addClass('hidden');
+    this.helpButton.removeClass('hidden');
     this.setActiveMode(new Sandbox(this.graph, cytoscape))
 };
 
 App.prototype.setGuideMode = function () {
     this.pagerPrevious.addClass('hidden');
     this.pagerStartGuide.addClass('hidden');
-
+    
+    this.helpButton.addClass('hidden');
     this.pagerFinishGuide.addClass('hidden');
     this.pagerNext.removeClass('hidden');
     this.setActiveMode(new Guide(this.graph))
@@ -145,6 +153,16 @@ App.prototype.setActiveMode = function (newMode) {
     this.activeMode = newMode;
     this.updateStatus();
 };
+
+App.prototype.toggleHelp = function () {
+    if (this.helpContent.hasClass('hidden'))
+    {
+        this.helpContent.removeClass('hidden');
+    }
+    else {
+        this.helpContent.addClass('hidden');
+    }
+}
 
 App.prototype.setAbout = function () {
     app.aboutContainer.removeClass("hide");
@@ -249,7 +267,10 @@ $(function () {
     });
     app.closeAboutButton.click(function () {
         app.closeAbout();
-    })
+    });
+    app.helpButton.click(function() {
+        app.toggleHelp();
+    });
 });
 
 $(window).on('status-update', function (event) {
